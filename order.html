@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>order</title>
+</head>
+<style>
+  *{
+    margin:0;
+    padding: 0;
+  }
+  html,body{
+    width:100%;
+    height:100%;
+    cursor:none;
+  }
+  body{
+    background: #f5faff;
+  }
+  .center{
+    width:100%;
+    height:100%;
+  }
+  #div1 { 
+    font:200px '微软雅黑';
+    font-weight: bolder;
+    text-align: center; background-color: #666666;
+    width: 90%;
+    height: 80%;
+    line-height: 600px;
+    margin-bottom:20px;
+    color: transparent;
+    text-shadow:0 0 6px #F96, -1px -1px  #FFF, 1px -1px  #444;
+  }
+  #start{
+    width:50%;
+    height:60px;
+    background: #C5DFF8;
+    font:40px/60px "微软雅黑";
+    font-weight: bolder;
+    color:#566F89 ;
+  }
+</style>
+<body>
+  <div class="center" align="center">
+    <br>
+    <p id="start">开始抽奖</p>
+    <br>
+    <hr color="blue">
+    <br>
+    <div id="div1" align="center">?????</div>
+  </div>
+</body>
+</html>
+<script>
+    var i = 0;
+    //t用来接收setTimeOut()的返回值
+    var t;
+    var st = ["郭玉伟", "赵红坡", "杨德选", "朱浩", "赵博", "李杰", "蔡飞", "于渤", "秦存枝", "苏志强", "王胜南", "郭晓丽", "闫东亮", "孙燕", "毛书洋", "龚志豪", "王浩", "徐祥政", "刘政委", "张建峰", "薛恺昱", "尤源", "王韬", "邢璐", "李浩", "孙吉", "孟菲", "贾浩天", "高振宇", "程伟华", "朱君龙", "宋海怡", "纪天宇", "朱晓雪", "乔晨霞", "韩威海", "邢临生", "李旭", "吴兴华", "刘新龙", "孙正洁", "安云霞", "乔高龙", "党浩", "侯迪迪", "董玉奇", "孙月", "李其航", "安华", "仇林", "王迎港", "高帆", "耿劲腾", "张振华", "孙玉晓", "黄钰", "张鑫", "姚鹏宇", "霍绘绘", "王莎", "李现涛", "李年", "李慧娇", "马桂青", "高向清", "温晓松", "孙贝贝", "陈磊", "庞美慧", "李珊珊", "盖怀臻", "蒋婷婷", "王树博"];
+    var u;
+    function $id(id){
+      return document.getElementById(id);
+    }
+    //点名函数
+    function students()
+    {
+      //顺序点名
+    /*  if (i < st.length)
+      {
+        u = st[i];
+      }
+      else
+      {
+        //点到最后一个就回来重新点起
+        i = 0;
+        u = st[i];
+      }
+      i = i + 1;
+*/
+      //随机点名 产生0-数组长度之间的数作为数组下标
+      var num = Math.floor(Math.random()*st.length);
+      u = st[num];
+      //更改文本框显示的value值
+      document.getElementById("div1").innerHTML = u ;
+      t = setTimeout("students()", 40);
+    }
+    //停止点名函数
+    function stop()
+    {
+      clearTimeout(t);
+    }
+    var oStart = $id("start");
+    var flag = true;
+
+    document.onkeydown=function(e){
+      var e = e||window.event;
+      if(e.keyCode == 32){
+        if(flag){
+          students();
+          flag = false;
+          oStart.innerHTML = "抽奖进行中…";
+        }else{
+          stop();
+          flag = true;
+          oStart.innerHTML = "再抽一次";
+        }
+
+      }
+    }
+    
+</script>
